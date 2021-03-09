@@ -2,7 +2,8 @@
 module "app-service" {
 
   name          = var.app_name
-  resourceGroup = data.azurerm_resource_group.workshop.name
+  resourceGroup = var.resource_group
+  #resourceGroup = data.azurerm_resource_group.workshop.name
   source        = "./modules/azure-app-service"
   location      = var.location
   tags          = var.tags

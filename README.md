@@ -9,7 +9,7 @@ Create a file called `my.tfvars`
 app_name = "someapp"
 
 # Azure settings
-resourceGroup = "rg-name"
+resource_group = "rg-name"
 location = "northeurope"
 tags = {
   key = "value"

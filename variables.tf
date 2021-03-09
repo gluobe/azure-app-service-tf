@@ -4,7 +4,7 @@ variable "location" {
 variable "tags" {
   type = map(any)
 }
-variable "resourceGroup" {}
+variable "resource_group" {}
 variable "app_name" {}
 variable "git_user" {}
 variable "git_password" {}

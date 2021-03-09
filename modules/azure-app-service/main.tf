@@ -1,7 +1,7 @@
 ## Resource group to hold all the resources
 resource "azurerm_resource_group" "app" {
 
-  name     = var.resourceGroup
+  name     = var.resource_group
   location = var.location
   tags     = var.tags
 }
