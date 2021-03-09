@@ -1,0 +1,11 @@
+*tfvars
+*tfplan
+*.tfstate*
+*lock.hcl
+*lock.info
+
+
+# Terraform
+.terraform/
+terraform.tfstate.d/
+
