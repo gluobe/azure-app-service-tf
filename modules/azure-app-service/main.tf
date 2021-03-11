@@ -1,17 +1,10 @@
-## Resource group to hold all the resources
-resource "azurerm_resource_group" "app" {
-
-  name     = var.resource_group
-  location = var.location
-  tags     = var.tags
-}
 ## Storage
 ### Storage Account
 resource "azurerm_storage_account" "app" {
 
-  name                     = var.name
-  resource_group_name      = azurerm_resource_group.app.name
-  location                 = azurerm_resource_group.app.location
+  name = var.name
+  resource_group_name = var.resource_group
+  location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
   allow_blob_public_access = true
@@ -27,11 +20,11 @@ resource "azurerm_storage_container" "app" {
 ## Database
 resource "azurerm_cosmosdb_account" "app" {
 
-  name                = var.name
-  resource_group_name = azurerm_resource_group.app.name
-  location            = azurerm_resource_group.app.location
-  offer_type          = "Standard"
-  kind                = "MongoDB"
+  name = var.name
+  resource_group_name = var.resource_group
+  location   = var.location
+  offer_type = "Standard"
+  kind       = "MongoDB"
 
   consistency_policy {
     consistency_level       = "BoundedStaleness"
@@ -40,18 +33,18 @@ resource "azurerm_cosmosdb_account" "app" {
   }
 
   geo_location {
-    location          = azurerm_resource_group.app.location
+    location          = var.location
     failover_priority = 0
   }
 }
 ## Web App Service
 resource "azurerm_app_service_plan" "app" {
 
-  name                = var.name
-  resource_group_name = azurerm_resource_group.app.name
-  location            = azurerm_resource_group.app.location
-  kind                = "Linux"
-  reserved            = true
+  name = var.name
+  resource_group_name = var.resource_group
+  location = var.location
+  kind     = "Linux"
+  reserved = true
 
   sku {
     tier = "Basic"
@@ -60,9 +53,9 @@ resource "azurerm_app_service_plan" "app" {
 }
 resource "azurerm_app_service" "app" {
 
-  name                = var.name
-  resource_group_name = azurerm_resource_group.app.name
-  location            = azurerm_resource_group.app.location
+  name = var.name
+  resource_group_name = var.resource_group
+  location            = var.location
   app_service_plan_id = azurerm_app_service_plan.app.id
 
   site_config {

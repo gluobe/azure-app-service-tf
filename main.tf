@@ -1,13 +1,11 @@
 ### Azure App Service ###
 module "app-service" {
 
-  name          = var.app_name
-  #resource_group = var.resource_group
+  name           = var.app_name
   resource_group = data.azurerm_resource_group.workshop.name
-  #resource_group = data.terraform_remote_state.resource_group.name
-  source        = "./modules/azure-app-service"
-  location      = var.location
-  tags          = var.tags
+  source         = "./modules/azure-app-service"
+  location       = data.azurerm_resource_group.workshop.location
+  tags           = var.tags
 
   app_service_registry_username  = var.git_user
   app_service_registry_password  = var.git_password
