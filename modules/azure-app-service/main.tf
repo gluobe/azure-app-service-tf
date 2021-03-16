@@ -68,6 +68,14 @@ resource "azurerm_app_service" "app" {
     "DOCKER_REGISTRY_SERVER_URL"          = var.app_service_registry_host
     "DOCKER_REGISTRY_SERVER_USERNAME"     = var.app_service_registry_username
     "DOCKER_REGISTRY_SERVER_PASSWORD"     = var.app_service_registry_password
+    "CLOUD"                               = "AZ"
+    "MANAGED_DB"                          = "true"
+    "MANAGED_FILES"                       = "true"
+    "AZURE_DB_USER"                       = azurerm_cosmosdb_account_app.name
+    "AZURE_DB_PASSWORD"                   = azurerm_cosmosdb_account_app.primary_key
+    "AZURE_STORAGE_ACCOUNT"               = azurerm_storage_account.app.name
+    "AZURE_STORAGE_CONTAINER"             = azurerm_storage_container.app.name
+    "AZURE_STORAGE_KEY"                   = azurerm_storage_account.app.primary_access_key
   }
 
 }
