@@ -19,3 +19,6 @@ variable "app_service_registry_account" {
 variable "app_service_registry_image_url" {
 }
 
+variable "dns_rg" {}
+variable "dns_zone" {}
+

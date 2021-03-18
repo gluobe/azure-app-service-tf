@@ -7,6 +7,9 @@ module "app-service" {
   location       = data.azurerm_resource_group.workshop.location
   tags           = var.tags
 
+  dns_zone       = data.azurerm_dns_zone.domain.name
+  dns_rg         = data.azurerm_resource_group.domain.name
+
   app_service_registry_username  = var.git_user
   app_service_registry_password  = var.git_password
   app_service_registry_account   = var.git_account

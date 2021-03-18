@@ -80,3 +80,32 @@ resource "azurerm_app_service" "app" {
 
 }
 
+
+
+## Custom Domain
+
+resource "azurerm_app_service_custom_hostname_binding" "app" {
+  hostname            = "terraform.${var.dns_zone}"
+  app_service_name    = azurerm_app_service.app.name
+  resource_group_name = azurerm_app_service.app.resource_group_name
+}
+
+resource "azurerm_dns_txt_record" "app" {
+  name = "asuid.terraform"
+  resource_group_name = var.dns_rg
+  zone_name = var.dns_zone
+  ttl = 300
+
+  record {
+    value = azurerm_app_service.app.custom_domain_verification_id
+  }
+}
+resource "azurerm_dns_cname_record" "app" {
+  name = "terraform"
+  resource_group_name = var.dns_rg
+  zone_name = var.dns_zone
+  ttl = 300
+
+  record = azurerm_app_service.app.default_site_hostname
+}
+
