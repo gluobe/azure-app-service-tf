@@ -5,7 +5,7 @@ variable "tags" {
   type = map(any)
 }
 variable "resource_group" {}
-variable "app_name" {}
+variable "team_name" {}
 variable "git_user" {}
 variable "git_password" {}
 variable "git_account" {}

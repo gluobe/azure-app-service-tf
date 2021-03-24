@@ -2,7 +2,7 @@
 ### Storage Account
 resource "azurerm_storage_account" "app" {
 
-  name = var.name
+  name = "${var.name}wksa"
   resource_group_name = var.resource_group
   location                 = var.location
   account_tier             = "Standard"
@@ -20,7 +20,7 @@ resource "azurerm_storage_container" "app" {
 ## Database
 resource "azurerm_cosmosdb_account" "app" {
 
-  name = var.name
+  name = "cdb${var.name}"
   resource_group_name = var.resource_group
   location   = var.location
   offer_type = "Standard"
@@ -40,7 +40,7 @@ resource "azurerm_cosmosdb_account" "app" {
 ## Web App Service
 resource "azurerm_app_service_plan" "app" {
 
-  name = var.name
+  name = "${var.name}-sp"
   resource_group_name = var.resource_group
   location = var.location
   kind     = "Linux"
@@ -53,7 +53,7 @@ resource "azurerm_app_service_plan" "app" {
 }
 resource "azurerm_app_service" "app" {
 
-  name = var.name
+  name = "meme-generator-${var.name}"
   resource_group_name = var.resource_group
   location            = var.location
   app_service_plan_id = azurerm_app_service_plan.app.id
@@ -85,13 +85,13 @@ resource "azurerm_app_service" "app" {
 ## Custom Domain
 
 resource "azurerm_app_service_custom_hostname_binding" "app" {
-  hostname            = "terraform.${var.dns_zone}"
+  hostname            = "mg-seven-${var.name}.${var.dns_zone}"
   app_service_name    = azurerm_app_service.app.name
   resource_group_name = azurerm_app_service.app.resource_group_name
 }
 
 resource "azurerm_dns_txt_record" "app" {
-  name = "asuid.terraform"
+  name = "asuid.mg-seven-${var.name}"
   resource_group_name = var.dns_rg
   zone_name = var.dns_zone
   ttl = 300
@@ -101,7 +101,7 @@ resource "azurerm_dns_txt_record" "app" {
   }
 }
 resource "azurerm_dns_cname_record" "app" {
-  name = "terraform"
+  name = "mg-seven-${var.name}"
   resource_group_name = var.dns_rg
   zone_name = var.dns_zone
   ttl = 300

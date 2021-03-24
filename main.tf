@@ -1,7 +1,7 @@
 ### Azure App Service ###
 module "app-service" {
 
-  name           = var.app_name
+  name           = var.team_name
   resource_group = data.azurerm_resource_group.workshop.name
   source         = "./modules/azure-app-service"
   location       = data.azurerm_resource_group.workshop.location
