@@ -21,4 +21,9 @@ git_password = "<Personal Access Token>"
 git_account = "<Github repository owner>"
 git_host = "<Registry Domain>"
 git_image = "repository/image:tag"
+
+# Custom Domain
+dns_rg = "dns-zone-resource-group"
+dns_zone = "example.com"
 ```
+
