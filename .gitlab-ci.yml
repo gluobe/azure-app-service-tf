@@ -1,0 +1,4 @@
+---
+include:
+  project: 'gluo-devops/cicd'
+  file: 'terraform-azure.yml'
