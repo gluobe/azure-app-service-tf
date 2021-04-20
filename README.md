@@ -6,7 +6,7 @@ Create a file called `my.tfvars`
 
 ```
 # You app name, use only lowercase characters
-app_name = "someapp"
+team_name = "team"
 
 # Azure settings
 resource_group = "rg-name"
