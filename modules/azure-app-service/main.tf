@@ -88,6 +88,8 @@ resource "azurerm_app_service_custom_hostname_binding" "app" {
   hostname            = "mg-seven-${var.name}.${var.dns_zone}"
   app_service_name    = azurerm_app_service.app.name
   resource_group_name = azurerm_app_service.app.resource_group_name
+  # binding fails without
+  depends_on          = [ azurerm_dns_txt_record.app ]
 }
 
 resource "azurerm_dns_txt_record" "app" {
